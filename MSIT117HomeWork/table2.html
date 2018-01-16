@@ -30,38 +30,40 @@
             }               
         }
         
-        function chkPassword() {
-
-            var thePwd = document.getElementById("idpassword").value;
-            var thePwdLen = thePwd.length;
-            var flag1 = false, flag2 = false;
-
-
-            if (thePwd == "") {
-                alert("請勿空值");
+        function chkPassword(str) {
+            var rC = {
+                lW: '[a-z]',
+                uW: '[A-Z]',
+                nW: '[0-9]',
+                sW: '[\\u0020-\\u002F\\u003A-\\u0040\\u005B-\\u0060\\u007B-\\u007E]'
+            };
+            function Reg(str, rStr) {
+                var reg = new RegExp(rStr);
+                if (reg.test(str)) return true;
+                else return false;
             }
-            else if (thePwdLen >= 6) {
-                //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
-                //alert(">=6");
-                for (var i = 0; i < thePwdLen; i++) {
-                    var pwdChr = thePwd.charAt(i).toUpperCase();
+            if (str.length < 6) {
 
-                    if (pwdChr >= "A" && pwdChr <= "Z")
-                        flag1 = true;
-                    else if (pwdChr >= "0" && pwdChr <= "9")
-                        flag2 = true;
+                alert("您的密碼長度太短");
+                return false;
+            } else {
+                var tR = {
+                    l: Reg(str, rC.lW),
+                    u: Reg(str, rC.uW),
+                    n: Reg(str, rC.nW),
+                    s: Reg(str, rC.sW)
+                };
+                if ((tR.l && tR.u && tR.n) || (tR.l && tR.u && tR.s) || (tR.s && tR.u && tR.n) || (tR.s && tR.l && tR.n)) {
 
-
-                    if (flag1 && flag2)
-                        break;
+                    alert("密碼ok");
+                    return true;
+                } else {
+                    alert("您的密碼必須含有“小寫字母”、“大寫字母”、“數字”、“特殊符號”中的任意三種");
+  
+                    return false;
                 }
-                if (flag1 && flag2) alert("correct");
-                else alert("incorrect");
             }
-            else {
-                alert("The Password length must been greater than 6");
-            }
-        }
+        }  
     </script>
 </head>
 <body>
@@ -89,7 +91,7 @@
                     </div>
                     <div class="st1">
                         <label for="idpassword" class="t1">密碼：</label>
-                        <input type="password" id="idpassword" name="pwd"  onblur="chkPassword" />
+                        <input type="password" id="idpassword" name="pwd"  onblur="chkPassword(document.getElementById('idpassword').value);" />
                     </div>
                     <div class="st1">
                         <label for="iddate" class="t1">日期：</label>
