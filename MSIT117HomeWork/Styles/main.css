@@ -1,0 +1,124 @@
+﻿body {
+}
+
+/*首頁css樣式*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#allpage {
+    width: 75%;
+    margin: auto;
+}
+
+.menu {
+    overflow: auto;
+    width: 100%;
+    background-color: #e9c7ae;
+    list-style: none;
+    border-top-left-radius: 15px; 
+    border-top-right-radius: 15px; 
+    border-bottom: 3px solid #ce5050;
+}
+
+    .menu li {
+        float: left;
+        width: 7em; 
+        border-right: 2px solid #ce5050;
+    }
+
+        .menu li a {
+            display: block;
+            text-align: center; 
+            line-height: 2em;
+            color: #000000;
+            text-decoration: none; 
+        }
+
+            .menu li a:hover {
+                background-color: #4f7ff3;
+                color: #d4cdc7;
+            }
+
+.logo1 {
+    display: block;
+}
+
+.content {
+    overflow: auto; 
+    width: 100%;
+    border: 1px solid #4f7ff3;
+}
+
+article {
+    width: 75%;
+    float: left;
+}
+
+aside {
+    width: 20%;
+    float: right;
+}
+
+.title {
+    background-color: #343eef;
+    color: white;
+    line-height: 2em;
+    padding-left: 20px;
+}
+
+article section {
+    margin: 16px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+}
+
+    article section p {
+        margin: 10px 0;
+    }
+
+
+footer {
+    color: #000000;
+    background-color: #e9c7ae;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: 3px solid #ce5050;
+    line-height: 2em;
+    text-align: center;
+}
+
+/*表格練習css樣式*/
+table {
+    border-collapse: collapse;
+    color: brown;
+    margin: 16Px auto;
+    margin-top: 30px;
+    font-size: 22px;
+    font-family: Consolas;
+}
+
+    table td {
+        border: #0094ff 5px solid;
+        text-align: center;
+        padding: 8px;
+    }
+
+th {
+    border: #0094ff 5px solid;
+    padding: 8px;
+    font-size: 26px;
+}
+
+tr:nth-child(2n) {
+    background-color: aliceblue
+}
+
+tr:nth-child(2n+1) {
+    background-color: cornsilk
+}
+
+tr:hover {
+    background-color: darkgray;
+}

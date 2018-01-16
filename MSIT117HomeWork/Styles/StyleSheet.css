@@ -1,0 +1,160 @@
+﻿body {
+}
+
+/*首頁css樣式*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#allpage {
+    width: 75%;
+    margin: auto;
+}
+
+.menu {
+    overflow: auto;
+    margin:auto;
+    width: 100%;
+    background-color: #e9c7ae;
+    list-style: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 3px solid #ce5050;
+    
+    
+}
+
+    .menu li {
+        float:left;
+        width: 7em;
+        border-right: 2px solid #ce5050;
+        
+    }
+
+        .menu li a {
+            display: block;
+            text-align: center;
+            line-height: 2em;
+            color: #000000;
+            text-decoration: none;
+        }
+
+            .menu li a:hover {
+                background-color: #4f7ff3;
+                color: #d4cdc7;
+            }
+
+.logo1 {
+    display: block;
+    width: 100%;
+}
+
+.content {
+    overflow: auto;
+    width: 100%;
+    border: 1px solid #4f7ff3;
+}
+
+article {
+    width: 100%;
+    margin:auto;
+}
+
+
+.title {
+    background-color: #343eef;
+    color: white;
+    line-height: 2em;
+    padding-left:50px;
+}
+
+article section {
+    margin: 16px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+}
+
+    article section p {
+        margin: 10px 0;
+    }
+
+
+footer {
+    color: #000000;
+    background-color: #e9c7ae;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: 3px solid #ce5050;
+    line-height: 2em;
+    text-align: center;
+}
+
+/*表格練習css樣式*/
+table {
+    border-collapse: collapse;
+    color: brown;
+    margin: 16Px auto;
+    margin-top: 20px;
+    margin-bottom:40px;
+    font-size: 22px;
+    font-family: Consolas;
+}
+
+    table td {
+        border: #0094ff 5px solid;
+        text-align: center;
+        padding: 8px;
+    }
+
+th {
+    border: #0094ff 5px solid;
+    padding: 8px;
+    font-size: 26px;
+}
+
+tr:nth-child(2n) {
+    background-color: aliceblue
+}
+
+tr:nth-child(2n+1) {
+    background-color: cornsilk
+}
+
+tr:hover {
+    background-color: darkgray;
+}
+
+/*from*/ 
+.st1 {
+    width: 450px;
+    border-bottom: 1px solid #8ea7bb;
+    margin: 20px;
+    padding-bottom: 10px;
+}
+
+.sub1 {
+    width: 450px;
+    margin: 20px;
+    text-align: center;
+}
+
+.t1 {
+    width: 120px;
+    float: left;
+    text-align: right;
+    /*border:1px solid red;*/
+    /*margin-right:3px;*/
+    padding-right: 3px;
+    /*調整寬浮動靠左，text值靠右，padding(區塊內容靠右)*/
+}
+
+fieldset {
+    width: 500px;
+    border: 1px solid #eecba5;
+    border-radius: 20px;
+}
+
+em {
+    color: red;
+}
