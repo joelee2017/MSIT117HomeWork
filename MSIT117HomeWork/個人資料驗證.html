@@ -13,6 +13,7 @@
         function chkName() {
             var theName = document.getElementById("nameid").value;
             var theNameLen = theName.length;
+            //var rg = /^[\u4E00-\u9FFF]{2,}$/;
 
             if (theName == "") {
                                 
@@ -112,54 +113,58 @@
         }
 
         function chkdate() { // yyyy/mm/dd
-            var dateformat = new RegExp("/^(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
-            var dateStr = document.getElementById('iddate').value;
+            var dateStr = document.getElementById("iddate").value;
+            var dateRe = new RegExp(/^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$/);
+
+
+            //function chkleap(dateStr) {
+            //    var dateObj = dateStr.split('/');
+
+            //    var theYear = parseInt(dateObj[0]);
+            //    var theMonth = parseInt(dateObj[1]);
+            //    var theDay = parseInt(dateObj[2]);
+
+            //    var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
+            //    if (isLeap) { // 若為閏年，最大日期限制改為 29
+            //        limitInMonth[1] = 29;
+            //    }
+
+            //    // 比對該日是否超過每個月份最大日期限制
+            //    return theDay <= limitInMonth[theMonth - 1]
+            //}
+            
+            
 
             if (dateStr == "") {
-
+                document.getElementById("dateinfo").style.color = "red";
                 document.getElementById("dateinfo").style.visibility = "visible";
                 document.getElementById("dateinfo").innerText = "請勿空值";
             }
-            else if (dateStr != dateformat) {
+            else {
 
-                document.getElementById("dateinfo").style.visibility = "visible";
-                document.getElementById("dateinfo").innerText = "請輸入指定格式";
+                if (dateStr.match(dateRe)){
+                    document.getElementById("dateinfo").style.color = "#00BB00";
+                    document.getElementById("dateinfo").style.visibility = "visible";
+                    document.getElementById("dateinfo").innerText = "格式正確";
+
+                    return true;
+                }
+
+                else {
+
+                    document.getElementById("dateinfo").style.visibility = "visible";
+                    document.getElementById("dateinfo").innerText = "請依照格式YYYY/MM/DD";
+
+                    
+                }
+                    
             }
-
-            else if (dateStr == dateformat) {
-
-                document.getElementById("dateinfo").style.visibility = "visible";
-                document.getElementById("dateinfo").innerText = "輸入正確";
-            }
-
-
-            //var dateObj = dateStr.split('/');
-            //var dateLen = dateObj.length;
-
-            ////列出12個月，每月最大日期限制
-            //var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-            //var theYear = parseInt(dateObj[0]);
-            //var theMonth = parseInt(dateObj[1]);
-            //var theDay = parseInt(dateObj[2]);
-            //var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
-
-
-            //else if (dateStr == ("^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$")) {
-
-            //    document.getElementById("dateinfo").style.visibility = "visible";
-            //    document.getElementById("dateinfo").innerText = "格式正確";
-            //}
-                              
-
-            //if (isLeap) { // 若為閏年，最大日期限制改為 29
-            //    limitInMonth[1] = 29;
-
-            //    return false;
-            //}
-            //比對該日是否超過每個月份最大日期限制
-            //return theDay <= limitInMonth[theMonth - 1]            
         }
+
+        function returnEx(id, ex) {
+
+        }
+        
     </script>
 </head>
 <body>
@@ -194,7 +199,7 @@
                     </div>
                     <div class="st1">
                         <label for="iddate" class="t1">日期：</label>
-                        <input class="in1" type="text" id="iddate" name="date" placeholder="ex：2018/01/16" onblur="chkdate();" /><span id="dateinfo"></span>
+                        <input class="in1" type="text" id="iddate" name="date" placeholder="ex：2018/01/16" onblur="chkdate()" /><span id="dateinfo"></span>
                         <p class="p1">格式：西元年/月/日yyyy/MM/dd</p>
                     </div>
                 </fieldset>
