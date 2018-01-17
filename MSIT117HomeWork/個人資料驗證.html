@@ -81,8 +81,7 @@
             if (str.length < 6)
             {
 
-                document.getElementById("passwordinfo").style.visibility = "visible";
-                document.getElementById("passwordinfo").innerText = "不能小於6位數";
+                returnEx("passwordinfo", "不能小於6位數");  
 
                 return false;                
             }
@@ -96,17 +95,14 @@
 
                 if(tR.u && tR.n && tR.s) 
                 {
-                    document.getElementById("passwordinfo").style.color = "#00BB00";
-                    document.getElementById("passwordinfo").style.visibility = "visible";
-                    document.getElementById("passwordinfo").innerText = "OK!!";
+                    returnSuccess("passwordinfo", "OK!!")
+
                     return true;
                     
                 }
                 else
                 {
-
-                    document.getElementById("passwordinfo").style.visibility = "visible";
-                    document.getElementById("passwordinfo").innerText = "密碼必須含有字母、數字、特殊符號";
+                    returnEx("passwordinfo", "密碼必須含有字母、數字、特殊符號");                         
                     return false;
                 }
             }
@@ -114,48 +110,55 @@
 
         function chkdate() { // yyyy/mm/dd
             var dateStr = document.getElementById("iddate").value;
-            var dateRe = new RegExp(/^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$/);
-
-
-            //function chkleap(dateStr) {
-            //    var dateObj = dateStr.split('/');
-
-            //    var theYear = parseInt(dateObj[0]);
-            //    var theMonth = parseInt(dateObj[1]);
-            //    var theDay = parseInt(dateObj[2]);
-
-            //    var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
-            //    if (isLeap) { // 若為閏年，最大日期限制改為 29
-            //        limitInMonth[1] = 29;
-            //    }
-
-            //    // 比對該日是否超過每個月份最大日期限制
-            //    return theDay <= limitInMonth[theMonth - 1]
-            //}
+            var dateRe = new RegExp("/^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$/");           
             
             
 
             if (dateStr == "") {
-                document.getElementById("dateinfo").style.color = "red";
-                document.getElementById("dateinfo").style.visibility = "visible";
-                document.getElementById("dateinfo").innerText = "請勿空值";
+
+                returnEx("dateinfo", "請勿空值");      
+
             }
             else {
 
-                if (dateStr.match(dateRe)){
-                    document.getElementById("dateinfo").style.color = "#00BB00";
-                    document.getElementById("dateinfo").style.visibility = "visible";
-                    document.getElementById("dateinfo").innerText = "格式正確";
+                var dateStr = document.getElementById("iddate").value;
 
-                    return true;
+                if (dateStr.match(dateRe)) {
+
+                    function chkleap() {
+                        var dateObj = dateStr.split("/");
+                        var date = new date(dateObj);
+
+                        //var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                        var theYear = parseInt(date[0]);
+                        var theMonth = parseInt(date[1]);
+                        var theDay = parseInt(date[2]);
+
+                        //var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
+                        //if (isLeap) { // 若為閏年，最大日期限制改為 29
+                        //    limitInMonth[1] = 29;
+                        //}
+
+                        //// 比對該日是否超過每個月份最大日期限制
+                        //return theDay <= limitInMonth[theMonth - 1]
+
+
+                        if (theMonth < 1 && theMonth > 12 || 1< theDay && theDay > 31) {
+
+                            returnEx("dateinfo", "輸入超過的日期"); 
+
+                        }
+                        else {
+
+                            returnSuccess("dateinfo", "格式正確")
+                        }
+                    }
+
                 }
 
                 else {
 
-                    document.getElementById("dateinfo").style.visibility = "visible";
-                    document.getElementById("dateinfo").innerText = "請依照格式YYYY/MM/DD";
-
-                    
+                    returnEx("dateinfo", "格式錯誤");                   
                 }
                     
             }
@@ -163,8 +166,18 @@
 
         function returnEx(id, ex) {
 
+            document.getElementById("dateinfo").style.color = "red";
+            document.getElementById("dateinfo").style.visibility = "visible";
+            document.getElementById("dateinfo").innerText = ex;
+
         }
-        
+        function returnsuccess(id, su) {
+
+            document.getElementById("dateinfo").style.color = "	#3D7878";
+            document.getElementById("dateinfo").style.visibility = "visible";
+            document.getElementById("dateinfo").innerText = su;
+
+        }        
     </script>
 </head>
 <body>
@@ -172,9 +185,9 @@
         <header>
             <nav>
                 <ul class="menu">
-                    <li><a href="table1.html">99乘法表</a></li>
-                    <li><a href="table2.html">帳號密碼</a></li>
-                    <li><a href="">合作夥伴</a></li>
+                    <li><a href="99乘法表.html">99乘法表</a></li>
+                    <li><a href="個人資料驗證.html">帳號密碼</a></li>
+                    <li><a href="/星星評分.html">星星評分</a></li>
                     <li><a href="">主要客戶</a></li>
                     <li><a href="">公司簡介</a></li>
                 </ul>
