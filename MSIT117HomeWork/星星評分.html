@@ -5,9 +5,22 @@
     <title>首頁</title>
     <link rel="stylesheet" href="Styles/StyleSheet.css" />
     <style>
-
+        .imgput{
+            -webkit-filter:grayscale(1);
+        }
+        .imgputn {
+            -webkit-filter: grayscale(0);
+        }
     </style>
     <script>
+        function changestarts() {
+            var cs = (event.target).id.split(0);
+            for (i = 1; i <= cs[1]; i++) {
+                document.getElementById("1" + i).className = "imgputn";
+            }
+                document.getElementById("lab1").innerText = "給予" + cs[1] + "星";
+
+        }        
 
     </script>
 </head>
@@ -28,18 +41,20 @@
         <div class="content">
             <article>
                 <h2 class="title">星星評分</h2>
-                <div>
-                    <img src="image/star.gif" />
-                    <img src="image/star.gif" />
-                    <img src="image/star.gif" />
-                    <img src="image/star.gif" />
-                    <img src="image/star.gif" />
-
+                <div class="starts">
+                        <img id="1" class="imgput" src="image/chngstar.gif" title="1分" />
+                        <img id="2" class="imgput" src="image/chngstar.gif" title="2分" />
+                        <img id="3" class="imgput" src="image/chngstar.gif" title="3分" />
+                        <img id="4" class="imgput" src="image/chngstar.gif" title="4分" />
+                        <img id="5" class="imgput" src="image/chngstar.gif" title="5分" />
+                        <br />
+                        <label id="lab1"></label>
                 </div>
+                <span id="dir"></span>
             </article>          
         </div> <!--end content-->
         <footer>
-            <p>000000000000000000000000000000000000000000</p>
+            <p>MSIT117303  李崇維</p>
         </footer>
     </div> <!--end allpage-->
     
