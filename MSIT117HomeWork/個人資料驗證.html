@@ -16,18 +16,14 @@
             //var rg = /^[\u4E00-\u9FFF]{2,}$/;
 
             if (theName == "") {
-                                
-                document.getElementById("accountinfo").style.visibility = "visible";
-                document.getElementById("accountinfo").innerText = "請勿空值";
-                
+
+                returnEx("accountinfo", "請勿空值");
 
                 return false;
             }
             else if (theNameLen < 2) {
 
-
-                document.getElementById("accountinfo").style.visibility = "visible";
-                document.getElementById("accountinfo").innerText="請輸入兩個以上字元";
+                returnEx("accountinfo", "請輸入兩個以上字元");
 
                 return false;
             }
@@ -37,17 +33,14 @@
                 for (var i = 0; i < theNameLen; i++) {
                     if (theName.charCodeAt(i) < 0x4E00 || theName.charCodeAt(i) > 0x9FA5) {
 
-
-                        document.getElementById("accountinfo").style.visibility = "visible";
-                        document.getElementById("accountinfo").innerText="請輸入中文";
+                        returnEx("accountinfo", "請輸入中文"); 
 
                         return false;
                     }
 
                     else {
-                        document.getElementById("accountinfo").style.color = "#00BB00";
-                        document.getElementById("accountinfo").style.visibility = "visible";
-                        document.getElementById("accountinfo").innerText="OK!!!";
+                                                   
+                        returnsuccess("accountinfo", "OK!!!");
 
                         return true;
 
@@ -109,73 +102,68 @@
         }
 
         function chkdate() { // yyyy/mm/dd
-            var dateStr = document.getElementById("iddate").value;
-            var dateRe = new RegExp("/^([0-9]{4})[./]{1}([0-9]{1,2})[./]{1}([0-9]{1,2})$/");           
-            
-            
 
-            if (dateStr == "") {
+            var dateStr = document.getElementById("iddate").value;        
+            
+            if (dateStr === "") {
 
                 returnEx("dateinfo", "請勿空值");      
-
             }
             else {
 
                 var dateStr = document.getElementById("iddate").value;
 
-                if (dateStr.match(dateRe)) {
+                var dateRe = new RegExp(/^[0-9]{4}[/](0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])$/);        
+
+                if (dateRe.test(dateStr)) {
+                    if (chkleap(dateStr)) {
+                        returnsuccess("dateinfo", dateStr + "正確");
+                    }
+                    else {
+                        returnEx("dateinfo", dateStr + "錯誤");
+                    }
 
                     function chkleap() {
-                        var dateObj = dateStr.split("/");
-                        var date = new date(dateObj);
+                        var dateObj = dateStr.split('/');
+                        //列出12個月，每月最大日期限制
+                        var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-                        //var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                        var theYear = parseInt(date[0]);
-                        var theMonth = parseInt(date[1]);
-                        var theDay = parseInt(date[2]);
+                        var theYear = parseInt(dateObj[0]);
+                        var theMonth = parseInt(dateObj[1]);
+                        var theDay = parseInt(dateObj[2]);
+                        var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
 
-                        //var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
-                        //if (isLeap) { // 若為閏年，最大日期限制改為 29
-                        //    limitInMonth[1] = 29;
-                        //}
-
-                        //// 比對該日是否超過每個月份最大日期限制
-                        //return theDay <= limitInMonth[theMonth - 1]
-
-
-                        if (theMonth < 1 && theMonth > 12 || 1< theDay && theDay > 31) {
-
-                            returnEx("dateinfo", "輸入超過的日期"); 
-
+                        if (isLeap) { // 若為閏年，將二月的最大日期限制改為 29
+                            limitInMonth[1] = 29;
                         }
-                        else {
 
-                            returnSuccess("dateinfo", "格式正確")
-                        }
+                        // 比對該日是否超過每個月份最大日期限制
+                        return theDay <= limitInMonth[theMonth - 1]
                     }
+                        
+                    
 
                 }
 
                 else {
 
-                    returnEx("dateinfo", "格式錯誤");                   
+                    returnEx("dateinfo", dateStr + "錯誤");                   
                 }
                     
             }
         }
 
-        function returnEx(id, ex) {
+        function returnEx(spanid, ex) {
 
-            document.getElementById("dateinfo").style.color = "red";
-            document.getElementById("dateinfo").style.visibility = "visible";
-            document.getElementById("dateinfo").innerText = ex;
+            document.getElementById(spanid).style.color = "red";
+            document.getElementById(spanid).innerText = ex;
+
 
         }
-        function returnsuccess(id, su) {
+        function returnsuccess(spanid, su) {
 
-            document.getElementById("dateinfo").style.color = "	#3D7878";
-            document.getElementById("dateinfo").style.visibility = "visible";
-            document.getElementById("dateinfo").innerText = su;
+            document.getElementById(spanid).style.color = "#3D7878";
+            document.getElementById(spanid).innerHTML = su;
 
         }        
     </script>
@@ -219,7 +207,7 @@
             </article>          
         </div> 
         <footer>
-            <p>000000000000000000000000000000000000000000</p>
+            <p>Tel:(02)2222-2222 &nbsp; 台北市復興南路一段390號</p>
         </footer>
     </div> <!--end allpage-->
     
