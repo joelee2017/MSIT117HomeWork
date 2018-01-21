@@ -4,6 +4,13 @@
     <meta charset="utf-8" />
     <title>日曆</title>
     <link rel="stylesheet" href="Styles/StyleSheet.css" />
+    <style>
+        .calendar1{
+            text-align:center;
+            padding:20px;
+            
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {            
             document.getElementById("idSelectYear").addEventListener("change", chkisLeap)    
@@ -25,38 +32,78 @@
             }   
             
            
-            //for (i = 1; i <= 31; i++) { //新增日
-            //    var opt = document.createElement("option");
-            //    opt.value = i;
-            //    opt.innerHTML = i;
-            //    document.getElementById("idSelectDay").appendChild(opt);
-            //}   
+            for (i = 1; i <= 31; i++) { //新增日
+                var opt = document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById("idSelectDay").appendChild(opt);
+            }   
 
         });                
 
         function chkisLeap(selectYear, selectMonth) {
-            var selectYear = document.getElementById("idSelectYear").value;       
-            var selectMonth = document.getElementById("idSelectMonth").value;   
-            var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+            var selectYear = parseInt(document.getElementById("idSelectYear").value);       
+            var selectMonth = parseInt(document.getElementById("idSelectMonth").value);   
+            var BigMonth = [1, 3, 5, 7, 8, 10, 12];
+            
             var isLeap = new Date(selectYear, 1, 29).getDate() === 29; // 是否為閏年?
-            if (isLeap == true) {
-                if (selectMonth == 2)
-                    for (i = 1; i <= 29; i++) { //新增日
-                        var opt = document.createElement("option");
-                        opt.value = i;
-                        opt.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(opt);
+
+            if ((BigMonth.indexOf(selectMonth)) == -1 ) {
+   
+                    if (selectMonth == 2) {
+
+                        var listday = document.getElementById("idSelectDay");
+                        for (var i = 0; i < listday.options.length;) {
+                            listday.removeChild(listday.options[i]);
+                        }
+
+                        if (isLeap == true) {
+                            for (i = 1; i <= 29; i++) { //新增日
+                                var opt = document.createElement("option");
+                                opt.value = i;
+                                opt.innerHTML = i;
+                                document.getElementById("idSelectDay").appendChild(opt);
+                            }
+                        }
+                        else {
+                            for (i = 1; i <= 28; i++) { //新增日
+                                var opt = document.createElement("option");
+                                opt.value = i;
+                                opt.innerHTML = i;
+                                document.getElementById("idSelectDay").appendChild(opt);
+                            }
+                        }
                     }
+                    else {
+                        var listday = document.getElementById("idSelectDay");
+                        for (var i = 0; i < listday.options.length;) {
+                            listday.removeChild(listday.options[i]);
+                        }
 
+                        for (i = 1; i <= 30; i++) { //新增日
+                            var opt = document.createElement("option");
+                            opt.value = i;
+                            opt.innerHTML = i;
+                            document.getElementById("idSelectDay").appendChild(opt);
+                        }
 
+                    }                
             }
+
             else {
+                var listday = document.getElementById("idSelectDay");
+                for (var i = 0; i < listday.options.length;) {
+                    listday.removeChild(listday.options[i]);
+                }
 
+                for (i = 1; i <= 31; i++) { //新增日
+                    var opt = document.createElement("option");
+                    opt.value = i;
+                    opt.innerHTML = i;
+                    document.getElementById("idSelectDay").appendChild(opt);
+                }
 
             }
-            
-            
         }      
 
     </script>
@@ -78,16 +125,16 @@
             <article>
                 <div>
                     <h2 class="title">日曆</h2>
-                    <br />
-                    <select id="idSelectYear"></select>
-                    <label>年</label>
-                    <select id="idSelectMonth"></select>
-                    <label>月</label>
-                    <select id="idSelectDay"></select>
-                    <label>日</label>
+                    <div class="calendar1">
+                        <br />
+                        <select id="idSelectYear"></select>
+                        <label>年</label>
+                        <select id="idSelectMonth"></select>
+                        <label>月</label>
+                        <select id="idSelectDay"></select>
+                        <label>日</label>
+                    </div>
                 </div>
-                <br />
-                <input type="button" id="idClear" value="clearDate" />
             </article>
         </div> <!--end content-->
         <footer>
