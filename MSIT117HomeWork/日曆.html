@@ -2,72 +2,62 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>日曆</title>
+    <link rel="stylesheet" href="Styles/StyleSheet.css" />
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("idSelectMonth").addEventListener("change", addDate);//binding
-            document.getElementById("idSelectYear").addEventListener("change", addDate);
-
-
-            document.getElementById("idClear").addEventListener("click", ClearDate);
-            for (i = 1; i <= 12; i++) {   //新增月
-                var opt = document.createElement("option"); //<option></option>
-                //opt.setAttribute("value", i); //<option value=i></option>
-                //var optTxt = document.createTextNode(i); //i
-                //opt.appendChild(optTxt); //<option value=i>i</option>
-                opt.value = i;
-                opt.innerHTML = i;
-                document.getElementById('idSelectMonth').appendChild(opt);
-            }
+        document.addEventListener("DOMContentLoaded", function () {            
+            document.getElementById("idSelectYear").addEventListener("change", chkisLeap)    
+            document.getElementById("idSelectMonth").addEventListener("change", chkisLeap);
+            document.getElementById("idSelectDay").addEventListener("change", chkisLeap);
 
             for (i = 2010; i <= 2020; i++) {   //新增年
-                var opt = document.createElement("option"); //<option></option>
-
+                var opt = document.createElement("option");
                 opt.value = i;
                 opt.innerHTML = i;
-                document.getElementById('idSelectYear').appendChild(opt);
+                document.getElementById("idSelectYear").appendChild(opt);               
             }
 
+            for (i = 1; i <= 12; i++) { //新增月
+                var opt = document.createElement("option");
+                opt.value = i;
+                opt.innerHTML = i;
+                document.getElementById("idSelectMonth").appendChild(opt);
+            }   
+            
+           
+            //for (i = 1; i <= 31; i++) { //新增日
+            //    var opt = document.createElement("option");
+            //    opt.value = i;
+            //    opt.innerHTML = i;
+            //    document.getElementById("idSelectDay").appendChild(opt);
+            //}   
 
-        });
-        var d = new Date(2018, 1, 19);
-        var d = new Date(2018, 1, 0);
-        alert(d.getDate());
+        });                
 
-        function addDate() {
-            var theMonth = document.getElementById("idSelectMonth").value;
-        }
-
-        function ClearDate() {
-            //document.getElementById("idSelectMonth").innerHTML = "";
-            var theMonths = document.getElementById("idSelectMonth");
-            var theMonthsLen = theMonths.length;
-            //alert(theMonths);
-            for (var i = 0; i < theMonthsLen; i++) {
-                //theMonths.firstChild.remove();
-                theMonths.childNodes[0].remove();
-            }
-        }
-
-        function isExistDate(dateStr) { // yyyy/mm/dd
-            var dateObj = dateStr.split('/');
-
-            //列出12個月，每月最大日期限制
+        function chkisLeap(selectYear, selectMonth) {
+            var selectYear = document.getElementById("idSelectYear").value;       
+            var selectMonth = document.getElementById("idSelectMonth").value;   
             var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-            var theYear = parseInt(dateObj[0]);
-            var theMonth = parseInt(dateObj[1]);
-            var theDay = parseInt(dateObj[2]);
-            var isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
+            var isLeap = new Date(selectYear, 1, 29).getDate() === 29; // 是否為閏年?
+            if (isLeap == true) {
+                if (selectMonth == 2)
+                    for (i = 1; i <= 29; i++) { //新增日
+                        var opt = document.createElement("option");
+                        opt.value = i;
+                        opt.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(opt);
+                    }
 
-            if (isLeap) { // 若為閏年，最大日期限制改為 29
-                limitInMonth[1] = 29;
+
             }
+            else {
 
-            // 比對該日是否超過每個月份最大日期限制
-            return theDay <= limitInMonth[theMonth - 1]
-        }
 
+            }
+            
+            
+        }      
 
     </script>
 </head>
@@ -86,10 +76,17 @@
         <img class="logo1" src="image/Banner_Sky-Sanctuary.jpg" alt="logo" title="logo" />
         <div class="content">
             <article>
-                <h2 class="title">日曆</h2>
-                <select id="idSelectYear"></select>
-                <select id="idSelectMonth"></select>
-
+                <div>
+                    <h2 class="title">日曆</h2>
+                    <br />
+                    <select id="idSelectYear"></select>
+                    <label>年</label>
+                    <select id="idSelectMonth"></select>
+                    <label>月</label>
+                    <select id="idSelectDay"></select>
+                    <label>日</label>
+                </div>
+                <br />
                 <input type="button" id="idClear" value="clearDate" />
             </article>
         </div> <!--end content-->
