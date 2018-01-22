@@ -11,12 +11,19 @@
             width: 50%;
             padding:20px;
         }
-        .img01{
-           display:block;
-           margin:0 auto;
+        .img01 {
+            display: block;
+            margin: 0 auto;
+            width:600px;
+            height:400px;
         }
         .Controlarea{
             margin:20px;
+        }
+        #left, #right,#play{
+            border:3px solid #000000;
+            margin-left:20px;
+            font-size:30px;
         }
     
     </style>
@@ -26,7 +33,6 @@
             showSlides();
             function showSlides() {
                 var slides = document.getElementsByClassName("img01");
-
                 for (var i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";//網頁讀進時先隱藏圖片
                 }
@@ -34,12 +40,16 @@
                 if (slideIndex > slides.length) { slideIndex = 1 }
                 setTimeout(showSlides, 2000);
                 slides[slideIndex - 1].style.display = "block";
+            }            
 
-            }
+            document.getElementById("left").addEventListener("click", clickleft);
 
+        });  
 
-        });   
-
+        function clickleft() {
+             document.images[0].src="images ++ .JPG";
+            
+        }
         
     </script>
 </head>
@@ -61,13 +71,13 @@
             <article>
                 <h2 class="title">廣告輪播</h2>
                 <div class="wrap">
-                    <img class="img01" src="image/005.JPG" width="600" height="400" />
-                    <img class="img01" src="image/007.JPG" width="600" height="400" />
-                    <img class="img01" src="image/002.JPG" width="600" height="400" />
-                    <img class="img01" src="image/003.JPG" width="600" height="400" />
-                    <img class="img01" src="image/004.JPG" width="600" height="400" />
-                    <img class="img01" src="image/005.JPG" width="600" height="400" />
-                    <img class="img01" src="image/006.JPG" width="600" height="400" />
+                    <a href="http://store.steampowered.com/"><img id="001" class="img01" src="image/001.JPG" /></a>
+                    <a href="https://tw.yahoo.com/"><img id="002" class="img01" src="image/002.JPG" /></a>
+                    <a href="https://www.businesstoday.com.tw/"><img id="003" class="img01" src="image/003.JPG" /></a>
+                    <a href="https://www.google.com.tw/"><img id="004" class="img01" src="image/004.JPG" /></a>
+                    <a href="https://www.cw.com.tw/"><img id="005" class="img01" src="image/005.JPG" /></a>
+                    <a href="https://www.gamer.com.tw/"><img id="006" class="img01" src="image/006.JPG" /></a>
+                    <a href="https://www.managertoday.com.tw/"><img id="007" class="img01" src="image/007.JPG" /></a>
                 </div>
                 <div class="Controlarea">
                     <div class="paganation" id="paganation" style="text-align:center;">
