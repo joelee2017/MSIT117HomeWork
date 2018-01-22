@@ -2,16 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>星星評分</title>
+    <title>廣告輪播</title>
     <link rel="stylesheet" href="Styles/StyleSheet.css" />
     <style>
-        
+        .wrap {
+            margin: 50px auto;
+            border: 5px solid #ff0000;
+            width: 50%;
+            padding:20px;
+        }
+        .img01{
+           display:block;
+           margin:0 auto;
+        }
+        .Controlarea{
+            margin:20px;
+        }
+    
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("advertising").addEventListener("change", fileViewer);
-        });
+            var slideIndex = 0;
+            showSlides();
+            function showSlides() {
+                var slides = document.getElementsByClassName("img01");
 
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";//網頁讀進時先隱藏圖片
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1 }
+                setTimeout(showSlides, 2000);
+                slides[slideIndex - 1].style.display = "block";
+
+            }
+
+
+        });   
+
+        
     </script>
 </head>
 <body>
@@ -30,17 +59,32 @@
         <img class="logo1" src="image/Banner_Sky-Sanctuary.jpg" alt="logo" title="logo" />
         <div class="content">
             <article>
-            <h2 class="title">廣告輪播</h2>
-            <div id="advertising">
-                <img src="image/google.JPG" />
-                <img src="image/star.gif" />
-                <img src="image/STEAM.JPG" />
-                <img src="image/Yahoo.JPG" />
-                <img src="image/今周刊.JPG" />
-                <img src="image/天下雜誌.JPG" />
-                <img src="image/巴哈姆特.JPG" />
-                <img src="image/經理人雜誌.JPG" />
-            </div>
+                <h2 class="title">廣告輪播</h2>
+                <div class="wrap">
+                    <img class="img01" src="image/005.JPG" width="600" height="400" />
+                    <img class="img01" src="image/007.JPG" width="600" height="400" />
+                    <img class="img01" src="image/002.JPG" width="600" height="400" />
+                    <img class="img01" src="image/003.JPG" width="600" height="400" />
+                    <img class="img01" src="image/004.JPG" width="600" height="400" />
+                    <img class="img01" src="image/005.JPG" width="600" height="400" />
+                    <img class="img01" src="image/006.JPG" width="600" height="400" />
+                </div>
+                <div class="Controlarea">
+                    <div class="paganation" id="paganation" style="text-align:center;">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <div class="Controlarea">
+                            <span id="left" class="arrow">11</span>
+                            <span id="play" class="arrow">33</span>
+                            <span id="right" class="arrow">22</span>
+                        </div>
+                    </div>
+                </div>
             </article>          
         </div> <!--end content-->
         <footer>
